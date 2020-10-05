@@ -17,6 +17,8 @@
  * Define Global Variables
  * 
 */
+const sections = document.querySelectorAll('section');
+const navbarList = document.getElementById('navbar__list');  /* original html code before modification */ 
 
 
 /**
@@ -34,7 +36,15 @@
 */
 
 // build the nav
-
+const navBuilder = function () {
+    let = htmlCode = '';
+    for (section of sections) {
+        console.log(section.dataset.nav);
+        tempID = section.id;
+        tempDataNav = section.dataset.nav;
+    } 
+}
+navBuilder()
 
 // Add class 'active' to section when near top of viewport
 
