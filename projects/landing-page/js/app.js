@@ -44,11 +44,32 @@ const navBuilder = function () {
         htmlCode += `<li><a class="menu__link ${tempID}"  href="#${tempID}"> ${tempDataNav} </a> </li>` + "\n";
     } 
     navbarList.innerHTML = htmlCode;
-    console.log(navbarList.innerHTML);
+    /*console.log(navbarList.innerHTML);*/
 }
 navBuilder()
 
 // Add class 'active' to section when near top of viewport
+function isElementVisible(section) {
+    const rect = section.getBoundingClientRect();
+    const vHeight  = window.innerHeight || document.documentElement.clientHeight;
+    console.log(rect.top, rect.bottom, rect.height, vHeight)
+    if (vHeight > rect.height) {
+        if ((rect.top && rect.bottom) >= 0) {
+            return true;
+        }
+    }
+    else if (rect.height >= vHeight) {
+        if (rect.top < vHeight) {
+            return true;
+        }
+    }
+    else {
+        return false;
+    }
+}
+for (section of sections) {
+    console.log(isElementVisible(section));
+}
 
 
 // Scroll to anchor ID using scrollTO event
