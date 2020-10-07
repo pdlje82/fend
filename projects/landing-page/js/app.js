@@ -39,10 +39,12 @@ const navbarList = document.getElementById('navbar__list');  /* original html co
 const navBuilder = function () {
     let = htmlCode = '';
     for (section of sections) {
-        console.log(section.dataset.nav);
-        tempID = section.id;
-        tempDataNav = section.dataset.nav;
+        let tempID = section.id;
+        let tempDataNav = section.dataset.nav;
+        htmlCode += `<li><a class="menu__link ${tempID}"  href="#${tempID}"> ${tempDataNav} </a> </li>` + "\n";
     } 
+    navbarList.innerHTML = htmlCode;
+    console.log(navbarList.innerHTML);
 }
 navBuilder()
 
