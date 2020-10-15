@@ -39,8 +39,8 @@ const navbarList = document.getElementById('navbar__list');  /* original html co
 const navBuilder = function () {
     let = htmlCode = '';
     for (section of sections) {
-        let tempID = section.id;
-        let tempDataNav = section.dataset.nav;
+        const tempID = section.id;
+        const tempDataNav = section.dataset.nav;
         htmlCode += `<li><a class="menu__link ${tempID}"  href="#${tempID}"> ${tempDataNav} </a> </li>` + "\n";
     } 
     navbarList.innerHTML = htmlCode;
@@ -49,37 +49,39 @@ const navBuilder = function () {
 navBuilder()
 
 // Add class 'active' to section when near top of viewport
-function isElementVisible(section) {
-    const rect = section.getBoundingClientRect();
-    const vHeight  = window.innerHeight || document.documentElement.clientHeight;
-    console.log(rect.top, rect.bottom, rect.height, vHeight)
-    if (vHeight > rect.height) {
-        if ((rect.top && rect.bottom) >= 0) {
-            return true;
+function isElementVisible(sections) {
+    for (section of sections) {
+        const rect = section.getBoundingClientRect();
+        /*console.log(rect.top, rect.height / 3)*/
+        if (rect.top <= rect.height / 3 && rect.top >= -rect.height / 3) {
+            section.classList.add("your-active-class");
+        }
+        else {
+            section.classList.remove("your-active-class");
         }
     }
-    else if (rect.height >= vHeight) {
-        if (rect.top < vHeight) {
-            return true;
-        }
-    }
-    else {
-        return false;
-    }
 }
-for (section of sections) {
-    console.log(isElementVisible(section));
-}
+document.addEventListener('scroll', function() {
+    isElementVisible(sections);
+});
 
 
 // Scroll to anchor ID using scrollTO event
-
-
 /**
  * End Main Functions
  * Begin Events
  * 
 */
+const anchorList = document.querySelectorAll('a');
+for (anchor of anchorList) {
+    anchor.addEventListener('click', function(event) {
+        event.preventDefault();
+        document.querySelector(this.getAttribute('href')).scrollIntoView({behavior: 'smooth'});
+    });
+};
+
+
+
 
 // Build menu 
 
